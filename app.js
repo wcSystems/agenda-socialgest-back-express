@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/contacts', contactsRouter);
-
+app.use(express.static('views'));
 app.get('*', function(req, res){
   res.status(404).send('404');
 });
