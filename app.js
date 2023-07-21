@@ -30,6 +30,18 @@ app.use('/contacts', contactsRouter);
   next(createError(404));
 }); */
 
+// serve angular app
+app.all('*', function (req, res) {
+res.status(200).sendFile(`/`, {root: `${__dirname}/public`});
+});
+
+// serve static files
+app.get('*.*', express.static(__dirname + '/public', {maxAge: '1y'}));
+// serve frontend paths
+app.all('*', function (req, res) {
+res.status(200).sendFile(`/`, {root: __dirname + '/public'});
+});
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
