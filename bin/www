@@ -36,16 +36,9 @@ server.listen(port);
 var socketIo = socket(server)
 
 socketIo.on('connection',(socket) =>{
-  console.log("A conexion has been created with", socket.id)
-
-  socket.on('change', (data) => {
-    socketIo.sockets.emit('change',data)
-  })
-
-  socket.on('create', (data) => {
-    socketIo.sockets.emit('create',data)
-  })
-
+  socket.on("all", (arg) => {
+    socketIo.sockets.emit('all')
+  });
 });
 
 
