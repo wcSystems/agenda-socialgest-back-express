@@ -6,7 +6,7 @@ var connection = mysql.createPool({
    host: 'localhost',
    user: 'root',
    password: '',
-   database: 'agenda'
+   database: 'rest_api'
 });
 
 function executeQuery(sql, callback) {
