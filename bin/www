@@ -36,9 +36,11 @@ server.listen(port);
 var socketIo = socket(server)
 
 socketIo.on('connection',(socket) =>{
-  socket.on("all", (arg) => {
-    socketIo.sockets.emit('all')
-  });
+
+  socket.on("create", (arg) => socketIo.sockets.emit('create',arg));
+  socket.on("edit", (arg) => socketIo.sockets.emit('edit',arg));
+  socket.on("delete", (arg) => socketIo.sockets.emit('delete',arg));
+
 });
 
 
