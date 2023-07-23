@@ -1,22 +1,25 @@
 var mysql = require('mysql');
 var migration = require('mysql-migrations');
 
-var connection = mysql.createPool({
-   connectionLimit: 10,
-   host: 'localhost',
-   user: 'root',
-   password: '',
-   database: 'rest_api'
-});
 
-/* var connection = mysql.createPool({
-   connectionLimit: 10,
-   host: 'ls-6aad697d8a7da588a86daf8023c6bc04fab93ad1.corq9qujxtx5.us-east-1.rds.amazonaws.com',
-   user: 'dbmasteruser',
-   password: '#LEur)S2WK)A(>;8kb~MAiT|YNe*iqZX',
-   database: 'dbmaster'
-}); */
 
+if (process.env.NODE_ENV == 'production') {
+   var connection = mysql.createPool({
+      connectionLimit: 10,
+      host: 'ls-6aad697d8a7da588a86daf8023c6bc04fab93ad1.corq9qujxtx5.us-east-1.rds.amazonaws.com',
+      user: 'dbmasteruser',
+      password: '#LEur)S2WK)A(>;8kb~MAiT|YNe*iqZX',
+      database: 'dbmaster'
+   });
+}else{
+   var connection = mysql.createPool({
+      connectionLimit: 10,
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'rest_api'
+   });
+}
 
 function executeQuery(sql, callback) {
    connection.getConnection((err, connection) => {
